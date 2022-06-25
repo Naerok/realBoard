@@ -15,6 +15,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             DataTables Advanced Tables
+                            <button id="regBtn" type="button" class="btn btn-xs pull-right">Register</button>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -71,6 +72,7 @@
     </div>
   </div>
 </div>
+
 <script>
 	$(document).ready(function(){
 		var result = '<c:out value="${result}" />';
@@ -88,7 +90,14 @@
 	                "게시글 " + parseInt(result) + " 번이 등록되었습니다.");
 	          }
 	           $("#myModal").modal("show");
-	        }    
+	        }
+	        
+	        $("#regBtn").on("click", function(){
+	        	self.location = "/board/register"
+	        });
+	        	
+	        
+	        
 
 		
 		
