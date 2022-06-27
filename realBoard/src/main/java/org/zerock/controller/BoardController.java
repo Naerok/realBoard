@@ -23,7 +23,7 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public void list(Model model) {
-		log.info("list~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		log.info("list");
 		
 		model.addAttribute("list", service.getList());
 	}
@@ -42,6 +42,14 @@ public class BoardController {
 
 		rttr.addFlashAttribute("result", bno);
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping({"/get","/modify"})
+	public void get(@RequestParam("bno")Long bno, Model model) {
+		
+		log.info("/get or modify");
+		model.addAttribute("board", service.get(bno));
+		
 	}
 	
 	@PostMapping("/modify")
