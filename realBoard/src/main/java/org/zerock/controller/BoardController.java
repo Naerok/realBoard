@@ -69,7 +69,7 @@ public class BoardController {
 		int count = service.remove(bno);
 		
 		if(count==1) {
-			rttr.addFlashAttribute("result", "remove 성공!");
+			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/board/list";
 	}
