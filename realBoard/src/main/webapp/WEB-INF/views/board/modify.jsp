@@ -57,13 +57,19 @@ $(document).ready(function() {
 		
 		console.log(operation);
 		
-		if(operation === 'remove'){
+		if(operation === 'list'){
+			self.location = "/board/list";
+			return;
+			
+		}else if(operation === 'remove'){
 			formObj.attr("action","/board/remove")
 			.attr("method","post");
 			formObj.submit();
-		}else if(operation === 'list'){
-			self.location = "/board/list";
-			return;
+			
+		}else if(operation === 'modify'){
+			formObj.attr("action","/board/modify")
+			.attr("method","post");
+			formObj.submit();
 		}
 	});
 });

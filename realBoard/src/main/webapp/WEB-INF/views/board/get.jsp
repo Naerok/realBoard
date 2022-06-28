@@ -33,12 +33,8 @@
 					<label>Writer</label> <input class="form-control" name="writer"
 						value='<c:out value="${board.writer}" />'>
 				</div>
-				<button data-oper="modify" class="btn btn-default"
-					onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">
-					Modify</button>
-				<button data-oper='list' class="btn btn-default"
-					onclick="location.href='/board/list'">
-					List</button>
+				<button data-oper="modify" class="btn btn-default" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
+				<button data-oper='list' class="btn btn-default" onclick="location.href='/board/list'">List</button>
 			</div>
 			<!-- /.panel-body -->
 		</div>
