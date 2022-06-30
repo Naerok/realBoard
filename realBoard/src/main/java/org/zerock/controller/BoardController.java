@@ -64,14 +64,17 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		int count = service.modify(board);
 		
 		if(count==1) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/board/list";
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		return "redirect:/board/list"; 
 	}
 	
 	@PostMapping("/remove")

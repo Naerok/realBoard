@@ -53,11 +53,13 @@
 					<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
 						<li class="page-item">
-					      <a class="page-link" href="#" tabindex="-1">PREV</a>
+					      <a class="page-link" href="${pageMaker.startPage -1" tabindex="-1">PREV</a>
 					    </li>
 			   		</c:if>
 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-						<li class="page-item"  ${pageMaker.cri.pageNum == num ? "active:":"" } ><a class="page-link" href="#">${num }</a></li>
+						<li class="page-item ${pageMaker.cri.pageNum == num?"active":""}" >
+							<a class="page-link" href="#">${num}</a>
+						</li>
 					</c:forEach>
 					<c:if test="${pageMaker.next}">
 						<li class="page-item">
@@ -66,6 +68,12 @@
 					</c:if>					    
 					</ul>
 				</div>
+				
+				<form id='actionForm' action="/board/list" method="get">
+					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+					<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+				</form>
+				
 				
 			</div>
 			<!-- /.panel-body -->
