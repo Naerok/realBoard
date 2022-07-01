@@ -33,8 +33,24 @@
 					<label>Writer</label> <input class="form-control" name="writer"
 						value='<c:out value="${board.writer}" />'>
 				</div>
-				<button data-oper="modify" class="btn btn-default" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
-				<button data-oper='list' class="btn btn-default" onclick="location.href='/board/list'">List</button>
+				
+				<form id='actionForm' action="/board/list" method="get">
+					<input type='hidden' name='pageNum' value='${cri.pageNum}'>
+					<input type='hidden' name='amount' value='${cri.amount}'>
+					<input type='hidden' name='bno' value='${cri.bno}'>
+				</form>
+				
+				<button type="button" class="btn btn-default listBtn" onclick="location.href='/board/list'">List</button>
+				<button type="button" class="btn btn-default modBtn" onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
+				<!-- 책과 다른부분. -->
+				<script>
+				
+				var actionForm=$("#actionForm");
+					$(".listBtn").click(function(e){
+						e.preventDefault();
+						actionForm.submit();
+					});
+				</script>
 			</div>
 			<!-- /.panel-body -->
 		</div>

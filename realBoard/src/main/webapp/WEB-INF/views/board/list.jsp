@@ -34,7 +34,7 @@
 						<c:forEach items="${list}" var="board">
 							<tr class="odd gradeX">
 								<td><c:out value="${board.bno}" /></td>
-								<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+								<td><a class='move' href='<c:out value="${board.bno}"/>'>
 										<c:out value="${board.title}" />
 								</a></td>
 								<td><c:out value="${board.writer}" /></td>
@@ -53,17 +53,17 @@
 					<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
 						<li class="page-item">
-					      <a class="page-link" href="${pageMaker.startPage -1" tabindex="-1">PREV</a>
+					      <a class="page-link" href="${pageMaker.startPage -1}" tabindex="-1">PREV</a>
 					    </li>
 			   		</c:if>
 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
 						<li class="page-item ${pageMaker.cri.pageNum == num?"active":""}" >
-							<a class="page-link" href="#">${num}</a>
+							<a class="page-link" href="${num}">${num}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${pageMaker.next}">
 						<li class="page-item">
-					      <a class="page-link" href="#" tabindex="-1">NEXT</a>
+					      <a class="page-link" href="${pageMaker.endPage +1}" tabindex="+1">NEXT</a>
 					    </li>
 					</c:if>					    
 					</ul>
@@ -135,7 +135,33 @@
 				$("#regBtn").on("click", function() {
 					self.location = "/board/register"
 				});
+				
+				var actionForm = $("#actionForm");
+				
+				$(".page-link").on("click", function(e){
+					e.preventDefault();
+					
+					var targetPage = $(this).attr("href");
+					
+					// console.log(targetPage);
+					
+					actionForm.find("input[name='pageNum']").val(targetPage);
+					actionForm.submit();
+					
+				});
+				
+				$(".move").on("click", function(e){
+					e.preventDefault();
+					
+					var targetBno = $(this).attr("href");
+					
+					console.log(targetBno);
+					
+					actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>'");
+					actionForm.attr("action", "/board/get").submit();
+					// action.submit();
+				});
 
-			})
+			});
 </script>
 <%@include file="../includes/footer.jsp"%>
