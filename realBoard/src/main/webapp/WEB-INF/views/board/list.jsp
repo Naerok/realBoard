@@ -57,7 +57,7 @@
 					    </li>
 			   		</c:if>
 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-						<li class="page-item ${pageMaker.cri.pageNum == num?"active":""}" >
+						<li class="page-item ${pageMaker.cri.pageNum == num ? "active" : "" }" >
 							<a class="page-link" href="${num}">${num}</a>
 						</li>
 					</c:forEach>
@@ -143,11 +143,8 @@
 					
 					var targetPage = $(this).attr("href");
 					
-					// console.log(targetPage);
-					
 					actionForm.find("input[name='pageNum']").val(targetPage);
 					actionForm.submit();
-					
 				});
 				
 				$(".move").on("click", function(e){
@@ -157,9 +154,9 @@
 					
 					console.log(targetBno);
 					
-					actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>'");
+					actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>");
 					actionForm.attr("action", "/board/get").submit();
-					// action.submit();
+					
 				});
 
 			});

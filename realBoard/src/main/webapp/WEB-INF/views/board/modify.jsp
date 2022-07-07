@@ -60,7 +60,10 @@ $(document).ready(function() {
 		console.log(operation);
 		
 		if(operation === 'list'){
-			self.location = "/board/list";
+			// self.location = "/board/list";
+			formObj.attr("action","/board/list")
+			.attr("method","get");
+			formObj.submit();
 			return;
 			
 		}else if(operation === 'remove'){

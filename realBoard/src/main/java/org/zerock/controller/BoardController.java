@@ -33,16 +33,16 @@ public class BoardController {
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		
-		log.info(cri);
-		log.info("list");
+		log.info("----------------------------------");
+		log.info("cri : "+cri);
 		
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri,123));
+		model.addAttribute("pageMaker", new PageDTO(cri,service.getTotalCount(cri)));
 	}
 	
 	@GetMapping("/register")
-	public void registerGet() {
-		
+	public void register() {
+
 	}
 
 	@PostMapping("/register")
@@ -65,7 +65,8 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri
+						, RedirectAttributes rttr) {
 		
 		int count = service.modify(board);
 		
@@ -79,13 +80,18 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri
+						,RedirectAttributes rttr) {
 		
 		int count = service.remove(bno);
 		
 		if(count==1) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:/board/list";
 	}
 	

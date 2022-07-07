@@ -37,7 +37,7 @@
 				<form id='actionForm' action="/board/list" method="get">
 					<input type='hidden' name='pageNum' value='${cri.pageNum}'>
 					<input type='hidden' name='amount' value='${cri.amount}'>
-					<input type='hidden' name='bno' value='${cri.bno}'>
+					<input type='hidden' name='bno' value='${board.bno}'>
 				</form>
 				
 				<button type="button" class="btn btn-default listBtn" onclick="location.href='/board/list'">List</button>
@@ -46,10 +46,23 @@
 				<script>
 				
 				var actionForm=$("#actionForm");
+					
+					// moveList
 					$(".listBtn").click(function(e){
 						e.preventDefault();
+						actionForm.find("input[name='bno']").remove(); 
 						actionForm.submit();
 					});
+					
+					$(".modBtn").click(function(e){
+						e.preventDefault();
+						actionForm.attr("action","/board/modify"); 
+						actionForm.submit();
+					});
+					
+					
+					
+					
 				</script>
 			</div>
 			<!-- /.panel-body -->
